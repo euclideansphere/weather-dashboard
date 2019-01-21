@@ -17,7 +17,21 @@ const cities = [
 ];
 
 class App extends Component {
-	state = { temperatureUnits: 'f' }
+	state = { temperatureUnits: 'f', temperatureUnitLabel: '\u00b0F' }
+
+	onTempUnitChange = () => {
+		if (this.state.temperatureUnits === 'f') {
+			this.setState({
+				temperatureUnits: 'c',
+				temperatureUnitLabel: '\u00b0C',
+			});
+		} else if (this.state.temperatureUnits === 'c') {
+			this.setState({
+				temperatureUnits: 'f',
+				temperatureUnitLabel: '\u00b0F',
+			});
+		}
+	}
 
 	mapWeatherToState = (response) => {
 		const weather = response.weather[0];
@@ -96,7 +110,9 @@ class App extends Component {
 
 		return (
 			<>
-				<Header />
+				<Header
+					temperatureUnitLabel={state.temperatureUnitLabel}
+					onTemperatureUnitButtonClick={this.onTempUnitChange} />
 				<WeatherCardGrid>
 					{cards}
 				</WeatherCardGrid>

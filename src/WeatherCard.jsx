@@ -25,7 +25,7 @@ const WeatherCard = ({
 		if (tempUnits === 'f') {
 			return <>{`${formattedTemp} \u00b0F`}</>;
 		} else if (tempUnits === 'c') {
-			return <>{`${formattedTemp} \u00b0C;`}</>;
+			return <>{`${formattedTemp} \u00b0C`}</>;
 		} else {
 			return <>{`${formattedTemp} K;`}</>;
 		}
@@ -34,8 +34,8 @@ const WeatherCard = ({
 	const	getTemperatureFromKelvin = (temperature) => {
 		if (tempUnits === 'f') {
 			return temperature * 9 / 5 - 459.67;
-		} else if (this.state.temperatureUnits === 'c') {
-			return temperature - 237.15;
+		} else if (tempUnits === 'c') {
+			return temperature - 273.15;
 		} else {
 			return temperature;
 		}
