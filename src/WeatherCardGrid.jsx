@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/**
- * I really want this to wrap at mobile breakpoints but that seams
- * not in the spirit of the design system.
- */
 const WeatherCardGrid = ({ children }) => {
 	return (
 		<div className="slds-p-around_large">
@@ -20,7 +16,8 @@ const WeatherCardGrid = ({ children }) => {
 }
 
 WeatherCardGrid.propTypes = {
-	// force children - how to force that they are weathercards?
+	// force children - how to force that they are weathercards without 
+	// typescript type inference?
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node
