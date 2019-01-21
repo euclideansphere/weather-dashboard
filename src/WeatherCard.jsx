@@ -19,18 +19,21 @@ const WeatherCard = ({
 	humidity,
 }) => {
 	const toTemperatureWithUnits = (temperature) => {
+		let formattedTemp = temperature;
+		if (!isNaN(formattedTemp) && isFinite(formattedTemp) && !Number.isInteger(formattedTemp))
+				formattedTemp = formattedTemp.toFixed(2);
 		if (tempUnits === 'f') {
-			return <>{`${temperature} \u00b0F`}</>;
+			return <>{`${formattedTemp} \u00b0F`}</>;
 		} else if (tempUnits === 'c') {
-			return <>{`${temperature} \u00b0C;`}</>;
+			return <>{`${formattedTemp} \u00b0C;`}</>;
 		} else {
-			return <>{`${temperature} K;`}</>;
+			return <>{`${formattedTemp} K;`}</>;
 		}
 	};
 
 	const	getTemperatureFromKelvin = (temperature) => {
 		if (tempUnits === 'f') {
-			return temperature * 9 / 5 + 459.67;
+			return temperature * 9 / 5 - 459.67;
 		} else if (this.state.temperatureUnits === 'c') {
 			return temperature - 237.15;
 		} else {
@@ -62,30 +65,36 @@ const WeatherCard = ({
 					verticalCenter={true}
 					body={currentDescription}
 				/>
-				<dl className="slds-list_inline">
-					<dt className="slds-item_label slds-text-color_weak">Current Temperature</dt>
-					<dd className="slds-item_detail" title="High Temperature">
-						{toTemperatureWithUnits(getTemperatureFromKelvin(temp))}
-					</dd>
-					<dt className="slds-item_label slds-text-color_weak">High</dt>
-					<dd className="slds-item_detail" title="High Temperature">
-						{toTemperatureWithUnits(getTemperatureFromKelvin(maxTemp))}
-					</dd>
-					<dt className="slds-item_label slds-text-color_weak">Low</dt>
-					<dd className="slds-item_detail" title="Low Temperature">
-						{toTemperatureWithUnits(getTemperatureFromKelvin(minTemp))}
-					</dd>
-					<dt className="slds-item_label slds-text-color_weak">Humidity</dt>
-					<dd className="slds-item_detail" title="High Temperature">
-						{`${humidity}%`}
-					</dd>
-				</dl>
+				<div className="slds-region_narrow">
+					<dl className="slds-dl_horizontal">
+						<dt className="slds-dl_horizontal__label slds-text-color_weak">Current Temperature</dt>
+						<dd className="slds-dl_horizontal__detail" title="Current Temperature">
+							{toTemperatureWithUnits(getTemperatureFromKelvin(temp))}
+						</dd>
+						<dt className="slds-dl_horizontal__label slds-text-color_weak">High</dt>
+						<dd className="slds-dl_horizontal__detail" title="High Temperature">
+							{toTemperatureWithUnits(getTemperatureFromKelvin(maxTemp))}
+						</dd>
+						<dt className="slds-dl_horizontal__label slds-text-color_weak">Low</dt>
+						<dd className="slds-dl_horizontal__detail" title="Low Temperature">
+							{toTemperatureWithUnits(getTemperatureFromKelvin(minTemp))}
+						</dd>
+						<dt className="slds-dl_horizontal__label slds-text-color_weak">Humidity</dt>
+						<dd className="slds-dl_horizontal__detail" title="High Temperature">
+							{`${humidity}%`}
+						</dd>
+					</dl>
+				</div>
 			</div>
 		);
 	}
 
 	return (
-		<Card id={cityName} key={cityName} heading={cityName}>
+		<Card
+			id={cityName}
+			className="slds-size_medium"
+			key={cityName}
+			heading={cityName}>
 			<div className="slds-card__body slds-card__body_inner">
 				{body}
 			</div>

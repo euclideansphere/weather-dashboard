@@ -3,6 +3,7 @@ import {
 } from '@salesforce/design-system-react';
 
 import WeatherCard from './WeatherCard';
+import WeatherCardGrid from './WeatherCardGrid';
 import Header from './Header';
 import './App.css';
 
@@ -96,7 +97,9 @@ class App extends Component {
 		return (
 			<>
 				<Header />
-				{cards}
+				<WeatherCardGrid>
+					{cards}
+				</WeatherCardGrid>
 			</>
 		);
 	}
