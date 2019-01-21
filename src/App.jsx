@@ -3,6 +3,7 @@ import {
 } from '@salesforce/design-system-react';
 
 import WeatherCard from './WeatherCard';
+import Header from './Header';
 import './App.css';
 
 // import { getWeather } from './weather';
@@ -93,17 +94,10 @@ class App extends Component {
 		});
 
 		return (
-			<div>
-				<div className="slds-page-header">
-					<div className="slds-page-header__row">
-						<div className="slds-page-header__title"
-							title="Penrod Weather Dashboard">
-								Penrod Weather Dashboard
-						</div>
-					</div>
-				</div>
+			<>
+				<Header />
 				{cards}
-			</div>
+			</>
 		);
 	}
 }
